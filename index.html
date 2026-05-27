@@ -59,7 +59,7 @@
     display: flex; gap: 8px; flex-wrap: wrap;
     margin-bottom: 1.25rem; align-items: center;
   }
-  .role-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--text3); text-transform: uppercase; margin-right: 4px; }
+  .role-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--text3); text-transform: uppercase; margin-right: 4px; }
   .role-btn {
     border: 1px solid var(--border2); border-radius: 20px;
     padding: 5px 13px; font-size: 12px; font-family: var(--mono);
@@ -76,7 +76,7 @@
   .game-input:focus { border-color: var(--purple); }
   .dates-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
   .date-field { display: flex; flex-direction: column; gap: 5px; }
-  .date-field label { font-size: 10px; font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); display: flex; align-items: center; gap: 6px; }
+  .date-field label { font-size: 12px; font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); display: flex; align-items: center; gap: 6px; }
   .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
   .date-field input[type="date"] { background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; padding: 8px 11px; font-family: var(--mono); font-size: 13px; color: var(--text); outline: none; transition: border-color 0.2s; color-scheme: dark; width: 100%; }
   body.light .date-field input[type="date"] { color-scheme: light; }
@@ -93,7 +93,7 @@
   .tl-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1rem; }
   .tl-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
   .tl-game { font-size: 14px; font-weight: 500; }
-  .tl-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
+  .tl-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
 
   /* FILTERABLE BLOCKS — dimmed when filter active and not relevant */
   .tl-row { display: flex; align-items: stretch; border-bottom: 1px solid var(--border); transition: opacity 0.2s; }
@@ -347,7 +347,7 @@ function roleChecklist(items) {
 }
 
 function gateBlock(tag, color, bg, date, desc, roleItems, gateRoles) {
-  const wknd = isWeekend(date) ? ` <span style="color:#f05a5a;font-size:10px;">⚠ weekend</span>` : '';
+  const wknd = isWeekend(date) ? ` <span style="color:#f05a5a;font-size:12px;">⚠ weekend</span>` : '';
   const rolesAttr = gateRoles.join(',');
   return `<div class="gate-block" data-roles="${rolesAttr}" style="background:${bg};border:1px solid ${color}22;">
     <div class="gate-arrow" style="color:${color}">▸</div>
@@ -361,7 +361,7 @@ function gateBlock(tag, color, bg, date, desc, roleItems, gateRoles) {
 }
 
 function msRow(color, label, date, chip, primary=false, roles='all') {
-  const wknd = isWeekend(date) ? `<span style="color:#f05a5a;font-size:10px;margin-left:6px;">⚠ weekend</span>` : '';
+  const wknd = isWeekend(date) ? `<span style="color:#f05a5a;font-size:12px;margin-left:6px;">⚠ weekend</span>` : '';
   const lc = primary ? 'ms-label primary' : 'ms-label';
   const dc = primary ? 'ms-date primary' : 'ms-date';
   const dotSize = primary ? 'width:10px;height:10px;' : '';
@@ -428,7 +428,7 @@ function render() {
       ${phaseRow('#7c6af7', `
         <div class="tl-phase-name"><span style="color:#7c6af7">◆</span> Phase 1 — Development & Pre-cert</div>
         <div class="tl-phase-note">Math review + mandatory test runs must be completed before Gate 1</div>
-        ${gateBlock('Gate 1 — Pre-cert quality gate','#7c6af7','rgba(124,106,247,0.07)',gate1,`QA regression + sign-off → cert submission ${fmtDate(certStart)}`,GATE1_ROLES,gate1Roles.split(','))}
+        ${gateBlock('Quality Gate 1 — Pre-cert quality gate','#7c6af7','rgba(124,106,247,0.07)',gate1,`QA regression + sign-off → cert submission ${fmtDate(certStart)}`,GATE1_ROLES,gate1Roles.split(','))}
       `, gate1Roles)}
 
       ${msRow('#7c6af799','Cert start (game client checklist passed)',certStart,'',true,'all')}
@@ -454,7 +454,7 @@ function render() {
             <span class="pim-chip">+${CERT_DAYS} days from cert start</span>
           </div>
         </div>
-        ${gateBlock('Gate 2 — Pre-release quality gate','#2dd4a0','rgba(45,212,160,0.07)',gate2,`QA regression + sign-off → pre-release ${fmtDate(preRelDate)}`,GATE2_ROLES,gate2Roles.split(','))}
+        ${gateBlock('Quality Gate 2 — Pre-release quality gate','#2dd4a0','rgba(45,212,160,0.07)',gate2,`QA regression + sign-off → pre-release ${fmtDate(preRelDate)}`,GATE2_ROLES,gate2Roles.split(','))}
       `, gate2Roles + ',design')}
 
       ${msRow('#2dd4a0','Pre-release (soft launch)',preRelDate,`${preRelDuration} days until release`,true,'all')}
@@ -462,7 +462,7 @@ function render() {
       ${phaseRow('#f0a43a', `
         <div class="tl-phase-name"><span style="color:#f0a43a">◆</span> Phase 3 — Pre-release monitoring <span class="badge" style="background:rgba(240,164,58,0.1);color:#f0a43a;">${PREREL_DAYS} days</span></div>
         <div class="tl-phase-note">Monitoring, hotfixes, metrics collection</div>
-        ${gateBlock('Gate 3 — Release quality gate','#f0a43a','rgba(240,164,58,0.07)',gate3,`QA sign-off → official release ${fmtDate(relDate)}`,GATE3_ROLES,gate3Roles.split(','))}
+        ${gateBlock('Quality Gate 3 — Release quality gate','#f0a43a','rgba(240,164,58,0.07)',gate3,`QA sign-off → official release ${fmtDate(relDate)}`,GATE3_ROLES,gate3Roles.split(','))}
       `, gate3Roles)}
 
       ${msRow('#f0a43a','🚀 Official Release',relDate,`total ${totalDays} days pipeline`,true,'all')}
